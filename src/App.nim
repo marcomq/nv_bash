@@ -3,9 +3,10 @@ import os
 
 nimview.add("spawnShell", proc (cmd: string): int =
   when defined(windows):
-    os.execShellCmd("start cmd.exe /c wsl.exe \"" & os.quoteShellPosix(cmd) & "\"")
+    echo "starting " & os.quoteShellPosix(cmd)
+    os.execShellCmd("start cmd.exe /c bash -c " & os.quoteShellPosix(cmd))
   else:
-    os.execShellCmd("xterm -e /bin/bash -c \"" & os.quoteShellPosix(cmd) & "\"")
+    os.execShellCmd("xterm -e /usr/bin/bash -c " & os.quoteShellPosix(cmd))
 )
 
 when isMainModule:
