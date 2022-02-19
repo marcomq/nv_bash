@@ -3,6 +3,7 @@ import os
 
 nimview.add("spawnShell", proc (cmd: string): int =
   when defined(windows):
+    
     let winCmd =  "start /wait cmd.exe /c bash -c " & 
       os. quoteShellWindows(cmd & " && sleep 5 || read -n 1 -p \"press any key\" VAR")
     echo "starting " & winCmd
@@ -14,4 +15,4 @@ nimview.add("spawnShell", proc (cmd: string): int =
 
 when isMainModule:
   enableStorage() # adds getStoredVal and setStoredVal
-  start()
+  start(title="Run command in WSL / Bash")
